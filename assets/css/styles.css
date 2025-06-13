@@ -1,0 +1,743 @@
+/* Import Google Fonts for Speak Now Tech theme */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* Root Variables for Speak Now Tech Theme */
+:root {
+    --speak-purple-dark: #2A0A5A; /* Deep violet */
+    --speak-purple-light: #6A0DAD; /* Brighter violet */
+    --speak-gold: #FFD700; /* Royal Gold */
+    --speak-gold-light: #FFF59D; /* Lighter Gold for accents */
+    --speak-red-accent: #FF0066; /* Vibrant Pink/Red */
+    --speak-silver: #E0E0E0; /* Light silver/grey for tech elements */
+    --speak-text-light: #F0F0F0;
+    --speak-text-dark: #202020;
+    --speak-neon-purple: #AA00FF; /* Vibrant Neon Purple */
+    --euphoria-lavender-dark: #3A2C5B; /* Darker Lavender/Purple for card background */
+    --lilac-neon-darkish: #7B24E0; /* New: Darker lilac/neon for button */
+
+
+    --speak-gradient-main: linear-gradient(135deg, var(--speak-purple-light) 0%, var(--speak-purple-dark) 100%);
+    --speak-gradient-accent: linear-gradient(135deg, var(--speak-gold) 0%, var(--speak-gold-light) 100%);
+
+    --shadow-deep: 0 10px 30px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(106, 13, 173, 0.3); /* Gold and purple glow */
+}
+
+/* General Body Styling */
+body {
+    font-family: 'JetBrains Mono', monospace; /* Techy, readable monospaced font */
+    background: linear-gradient(to bottom, rgba(42, 10, 90, 0.8), rgba(26, 10, 50, 0.8)), url('rtfbg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: var(--speak-purple-dark); /* Fallback */
+    background-blend-mode: multiply; /* Blends gradient with image for darker, richer tone */
+    color: var(--speak-text-light);
+    animation: fadeInBackground 2.5s ease-out forwards;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    overflow-x: hidden;
+    position: relative; /* For pseudo-element background glow */
+}
+
+/* Pseudo-element for subtle background glow/pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 15% 15%, rgba(255, 215, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(106, 13, 173, 0.08) 0%, transparent 40%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 20px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 20px);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+
+/* Keyframe animation for background fade-in */
+@keyframes fadeInBackground {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.3) !important; /* Very dark transparent background */
+    backdrop-filter: blur(15px); /* Strong blur for depth */
+    box-shadow: var(--shadow-deep);
+    border-bottom: 2px solid var(--speak-purple-light); /* Strong purple border */
+    border-radius: 0 0 30px 30px; /* More pronounced rounded corners */
+    padding: 1.2rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    animation: slideInDown 1.2s ease-out forwards;
+    width: 100%; /* Ensure navbar spans full width */
+}
+
+@keyframes slideInDown {
+    from { transform: translateY(-70px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.navbar-brand {
+    font-family: 'Press Start 2P', cursive; /* Retro tech font */
+    font-weight: 400;
+    color: var(--speak-gold) !important; /* Royal Gold */
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    transition: all 0.3s ease-in-out;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6); /* Intense gold glow */
+}
+
+.navbar-brand:hover {
+    color: var(--speak-gold-light) !important;
+    text-shadow: 0 0 15px rgba(255, 245, 157, 1), 0 0 30px rgba(255, 245, 157, 0.8);
+    transform: scale(1.05);
+}
+
+.nav-link {
+    font-family: 'JetBrains Mono', monospace; /* Techy font */
+    color: var(--speak-silver) !important; /* Silver for links */
+    font-weight: 500;
+    margin: 0 20px;
+    font-size: 1.05rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    text-transform: uppercase;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--speak-gold) !important;
+    transform: translateY(-3px);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -8px;
+    left: 50%;
+    background: linear-gradient(to right, var(--speak-gold), var(--speak-red-accent)); /* Gold to pink/red gradient underline */
+    border-radius: 2px;
+    transition: all 0.4s ease-out;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+    left: 0;
+    transform: translateX(0);
+}
+
+/* Main Content Container Styling */
+.container {
+    width: 100%; /* Ensure container takes full width to allow centering */
+    max-width: 1140px; /* Bootstrap's default max-width for large containers */
+    padding-left: 15px; /* Bootstrap default padding */
+    padding-right: 15px; /* Bootstrap default padding */
+    margin-left: auto; /* Auto margins to center horizontally */
+    margin-right: auto; /* Auto margins to center horizontally */
+
+    /* NEW: Make container fill available space and center its content */
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Stack main-container vertically */
+    flex-grow: 1; /* Allows the container to expand and take available vertical space */
+    align-items: center; /* Center main-container horizontally within .container */
+    justify-content: center; /* Center main-container vertically within .container */
+    
+    /* Add some internal padding to .container so main-container doesn't stick to edges */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.container > .main-container {
+    background-color: rgba(10, 5, 25, 0.7); /* Even darker, highly transparent background */
+    backdrop-filter: blur(20px); /* Very strong blur */
+    border-radius: 30px; /* More rounded, softer edge */
+    padding: 35px; /* Adjusted padding from 40px to 35px */
+    box-shadow: var(--shadow-deep), var(--shadow-glow);
+    animation: fadeInScale 1.5s ease-out forwards;
+    /* Removed margin-top and margin-bottom as .container's flex properties handle centering */
+    margin-top: 0 !important; /* Override any Bootstrap or previous margins */
+    margin-bottom: 0;
+    flex-grow: 0; /* Let its parent (.container) manage its size within the flex context */
+    border: 3px solid var(--speak-purple-light); /* More prominent purple border */
+    position: relative; /* For internal glow effect */
+    transform: scale(0.75) translateY(-30px); /* Adjusted zoom to 0.75 */
+}
+
+/* Inner glow for main container */
+.container > .main-container::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px dashed rgba(255, 215, 0, 0.2); /* Dashed gold inner border */
+    border-radius: 25px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+@keyframes fadeInScale {
+    from { transform: scale(0.8) translateY(0); opacity: 0; }
+    to { transform: scale(0.75) translateY(-30px); opacity: 1; } /* Adjusted to scale to 0.75 and move up */
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Press Start 2P', cursive;
+    font-weight: 400; /* Often only one weight for this font */
+    margin-bottom: 1.5rem;
+    color: var(--speak-gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.page-title {
+    background: linear-gradient(45deg, var(--speak-gold), var(--speak-red-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-size: 2.8rem; /* Larger for impact */
+    margin-bottom: 2.5rem; /* Adjusted from 3rem to 2.5rem */
+    position: relative;
+    letter-spacing: 2px;
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    width: 150px; /* Wider underline */
+    height: 4px; /* Thicker underline */
+    background: var(--speak-gradient-main); /* Purple gradient underline */
+    border-radius: 2px;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(106, 13, 173, 0.5);
+}
+
+/* Form Styles */
+.form-control {
+    background: rgba(255, 255, 255, 0.05); /* Very subtle transparent background */
+    border: 2px solid var(--speak-purple-light); /* Violet border */
+    border-radius: 15px; /* More rounded */
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    color: var(--speak-text-light);
+}
+
+.form-control:focus {
+    border-color: var(--speak-gold); /* Gold border on focus */
+    box-shadow: 0 0 0 0.3rem rgba(255, 215, 0, 0.4), 0 0 15px rgba(255, 215, 0, 0.6); /* Intense gold glow on focus */
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* Lighter placeholder text */
+    font-weight: 400;
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 15px; /* More rounded buttons */
+    padding: 14px 30px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    background-size: 200% 100%; /* For gradient shift effect */
+    background-position: left;
+}
+
+.btn::before { /* Scanline / Glitch effect on hover */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(transparent, rgba(255, 255, 255, 0.2), transparent), /* Light shimmer */
+        linear-gradient(90deg, transparent, var(--speak-gold), transparent), /* Gold swipe */
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 4px); /* Scanlines */
+    background-size: 100% 200%, 0% 100%, 100% 100%;
+    background-position: 0% 0%, 0% 0%, 0% 0%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: all 0.6s ease;
+    mix-blend-mode: overlay;
+    transform: scaleY(0); /* Start hidden */
+    transform-origin: top;
+    z-index: 1;
+}
+
+.btn:hover::before {
+    opacity: 1;
+    transform: scaleY(1);
+    background-position: 0% 100%, 100% 0%, 0% 0%; /* Move shimmer and swipe across */
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #8a2be2, #a64dff);
+    color: white;
+}
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(138, 43, 226, 0.8);
+    filter: brightness(1.2);
+}
+
+.btn-info {
+    background: linear-gradient(45deg, var(--lilac-neon-darkish), var(--speak-neon-purple)); /* Lilac neon darkish gradient */
+    color: white;
+}
+.btn-info:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px var(--lilac-neon-darkish), 0 0 15px var(--speak-neon-purple);
+    filter: brightness(1.2);
+}
+
+.btn-warning {
+    background: linear-gradient(45deg, #ffcc00, #ff9900);
+    color: var(--speak-text-dark); /* Dark text for contrast on gold */
+}
+.btn-warning:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(255, 204, 0, 0.8);
+    filter: brightness(1.2);
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #e74c3c, #ff6347);
+    color: white;
+}
+.btn-danger:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.8);
+    filter: brightness(1.2);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--speak-silver);
+}
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+}
+
+/* Sparkle effect for buttons (used for Add New Student) */
+.sparkle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+    transition: width 0.6s ease, height 0.6s ease;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    opacity: 0;
+    z-index: 2; /* Above ::before */
+}
+
+.sparkle:hover::after {
+    width: 250%;
+    height: 250%;
+    opacity: 1;
+}
+
+/* Stat Cards */
+.card {
+    background-color: var(--euphoria-lavender-dark); /* Darker Lavender/Purple for cards */
+    border: 2px solid var(--speak-neon-purple) !important; /* Neon purple border */
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6), 0 0 20px var(--speak-neon-purple); /* Neon purple glow */
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8), 0 0 30px var(--speak-neon-purple);
+}
+
+.card-body {
+    color: var(--speak-silver); /* Default text for card body */
+}
+
+.card-body h4 {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--speak-neon-purple); /* Neon purple for numbers/active status */
+    text-shadow: 0 0 8px var(--speak-neon-purple), 0 0 15px rgba(170, 0, 255, 0.5); /* Stronger neon glow */
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-body p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--speak-silver);
+}
+
+.card-body .fas {
+    color: var(--speak-gold); /* Gold icons in cards */
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+
+/* Table Styles */
+.table-container {
+    background: rgba(20, 10, 40, 0.7); /* Darker transparent background */
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-deep), var(--shadow-glow);
+    border: 2px solid var(--speak-gold); /* Gold border for table container */
+    margin-top: 15px; /* Adjusted from 20px to 15px */
+}
+
+.table {
+    margin-bottom: 0;
+    background: transparent;
+    color: var(--speak-text-light);
+}
+
+.table thead th {
+    background: linear-gradient(to right, var(--speak-purple-light), var(--speak-purple-dark)); /* Purple gradient header */
+    color: var(--speak-gold);
+    font-family: 'Press Start 2P', cursive;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: none;
+    padding: 1.5rem; /* More padding */
+    font-size: 1rem;
+    border-bottom: 2px solid var(--speak-gold); /* Gold line under header */
+    vertical-align: top; /* Align content to the top within the header cell */
+    text-align: center; /* Center text and icon */
+}
+
+.table thead th i {
+    display: block; /* Make icon a block element to put text on new line */
+    margin-bottom: 5px; /* Space between icon and text */
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1); /* Subtle gold divider */
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 215, 0, 0.08); /* Subtle gold tint on hover */
+    transform: scale(1.01);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.table tbody td {
+    padding: 1.2rem; /* More padding */
+    font-weight: 400;
+    vertical-align: middle;
+    border: none;
+    color: var(--speak-silver); /* Silver for row text */
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: 15px; /* More rounded alerts */
+    border: none;
+    padding: 1.5rem 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #2ecc71, #28a745);
+    color: white;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #e74c3c, #dc3545);
+    color: white;
+}
+
+/* Animation Classes */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+@keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    animation: slideInRight 0.8s ease forwards;
+}
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 215, 0, 0.3); /* Gold color */
+    border-radius: 50%;
+    border-top-color: var(--speak-gold);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Custom Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1050; /* Sit on top of everything else */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.modal.show {
+    display: flex; /* Use flex to center content */
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.modal-dialog {
+    transform: translateY(-50px); /* Start slightly up */
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0); /* Slide down */
+}
+
+.modal-content {
+    background-color: rgba(10, 5, 25, 0.95); /* Dark transparent background */
+    margin: auto;
+    padding: 30px;
+    border: 2px solid var(--speak-purple-light); /* Purple border */
+    border-radius: 20px;
+    box-shadow: var(--shadow-deep), 0 0 25px rgba(255, 215, 0, 0.3); /* Gold glow */
+    width: 90%;
+    max-width: 500px; /* Max width for larger screens */
+    text-align: center;
+    color: var(--speak-text-light);
+    position: relative; /* For the close button positioning */
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2); /* Subtle gold line */
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    justify-content: center; /* Center header content */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: var(--speak-gold);
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.modal-title {
+    flex-grow: 1; /* Allow title to take space */
+    text-align: center; /* Ensure title is centered */
+}
+
+.modal-body {
+    padding: 20px 0;
+    line-height: 1.6;
+    font-size: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--speak-silver);
+}
+
+#studentNameToDelete {
+    font-weight: bold;
+    color: var(--speak-gold-light);
+    text-shadow: 0 0 5px rgba(255, 245, 157, 0.5);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(255, 215, 0, 0.2); /* Subtle gold line */
+    padding-top: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around; /* Distribute buttons */
+}
+
+.modal .btn {
+    min-width: 120px; /* Ensure buttons have minimum width */
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.modal-header .close {
+    position: absolute; /* Position close button absolutely */
+    top: 15px;
+    right: 20px;
+    color: var(--speak-silver) !important;
+    opacity: 0.8;
+    font-size: 1.8rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: none;
+}
+
+.modal-header .close:hover {
+    color: var(--speak-red-accent) !important;
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+    
+    .main-container {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        border-radius: 20px;
+    }
+
+    .main-container::before {
+        border-radius: 18px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .table-responsive {
+        border-radius: 15px;
+    }
+
+    .table thead th, .table tbody td {
+        padding: 1rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+
+    .nav-link {
+        margin: 0 10px;
+        font-size: 0.95rem;
+    }
+
+    .modal-content {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .modal .btn {
+        min-width: unset; /* Remove min-width on small screens */
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .main-container {
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 15px;
+    }
+    
+    .table thead th, .table tbody td {
+        font-size: 0.8rem;
+        padding: 0.8rem 0.5rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        margin: 0 5px;
+        font-size: 0.85rem;
+    }
+
+    .modal-body {
+        font-size: 0.9rem;
+    }
+}
